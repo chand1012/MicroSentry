@@ -1,8 +1,6 @@
 #include <Servo.h>
 #define XPIN 10
 #define TRIGPIN 9
-#define STARTCHAR "<"
-#define ENDCHAR ">"
 
 Servo xservo;
 Servo trigservo;
