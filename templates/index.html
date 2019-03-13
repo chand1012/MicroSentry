@@ -8,8 +8,8 @@
         var trig = 0;
         var sendstring = "";
         function doWork(trigstring, event){
+            console.log(trigstring);
             $.post("/postrequest", {"byte":trigstring});
-            //console.log(buttonid);
             if (event!=="undefined") {
                 event.preventDefault();
             }
@@ -21,6 +21,7 @@
                 return toString(xpos)+toString(trig);
             }
         }
+        // the part after && can be simplified
         window.addEventListener('keydown', function(event){
             if (event.keyCode == 37 && (xpos!=180 || xpos!=0)) { // left
                 xpos += 1;
