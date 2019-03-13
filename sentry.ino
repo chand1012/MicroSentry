@@ -9,7 +9,7 @@ Servo trigservo;
 
 unsigned int xpos = 0;
 unsigned int spos = 0;
-String command = "";
+String command = ""; //String Format: "x:<angle>;trig:<1 or 0>;"
 
 void setup(){
     xservo.attach(XPIN);
@@ -25,5 +25,6 @@ void setup(){
 void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();
+        
     }
 }
