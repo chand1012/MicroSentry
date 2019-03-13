@@ -8,23 +8,35 @@ Servo xservo;
 Servo trigservo;
 
 unsigned int xpos = 0;
-unsigned int spos = 0;
-String command = ""; //String Format: "x:<angle>;trig:<1 or 0>;"
+unsigned int trigpos = 0;
+String command = ""; //String Format: "<angle><trig>" ie 0901 for 90 degrees and shoot
+                     // where angle is 000 to 180
 
 void setup(){
     xservo.attach(XPIN);
-    trigservov.attach(TRIGPIN);
+    trigservo.attach(TRIGPIN);
     Serial.begin(9600);
     while(!Serial){
         //need serial for operation
     }
-    Serial.write("Initialized.\n");
-    Serial.write("Starting primary function.\n");
+    //Serial.println("Initialized.");
+    //Serial.println("Starting primary function.");
 }
 
 void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();
-        
+        //Serial.println("Command: "+command);
+        xpos = command.substring(0,3).toInt();
+        trigpos = command.substring(3).toInt();
+      //  Serial.println(xpos);
+        if (trigpos!=0){
+            trigpos = 100;
+        }
+        //Serial.println(trigpos);
+        xservo.write(xpos);
+        trigservo.write(trigpos);
+      	//Serial.println(xservo.read());
+      //Serial.println(trigservo.read());
     }
 }
