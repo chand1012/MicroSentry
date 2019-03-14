@@ -14,11 +14,11 @@
                 event.preventDefault();
             }
         }
-        function genSend(xpos, trig){
+        function genSend(){
             if (xpos<100){
-                return "0"+toString(xpos)+toString(trig);
+                return "0"+xpos.toString()+trig.toString();
             } else {
-                return toString(xpos)+toString(trig);
+                return xpos.toString()+trig.toString();
             }
         }
         // the part after && can be simplified
@@ -30,14 +30,14 @@
             } else if (event.keyCode == 32){
                 trig = 1;
             }
-            sendstring = genSend(xpos, trig);
+            sendstring = genSend();
             doWork(sendstring, event);
         });
         window.addEventListener('keyup', function(event){
             if (event.keyCode == 32){
                 trig = 0;
             }
-            sendstring = genSend(xpos, trig);
+            sendstring = genSend();
             doWork(sendstring, event);
         });
         console.log("Script Loaded.");
