@@ -5,6 +5,8 @@
 Servo xservo;
 Servo trigservo;
 
+
+unsigned long trigtime = millis();
 unsigned int xpos = 0;
 unsigned int trigpos = 0;
 String command = ""; //String Format: "<angle><trig>" ie 0901 for 90 degrees and shoot
@@ -28,9 +30,10 @@ void loop(){
         xpos = command.substring(0,3).toInt();
         trigpos = command.substring(3).toInt();
       //  Serial.println(xpos);
-        if (trigpos!=0){
+        if (trigpos!=0 || (trigpos==0 and trigtime>=millis())){
+            trigtime = millis() + 1500;
             trigpos = 100;
-        }
+        } 
         //Serial.println(trigpos);
         xservo.write(xpos);
         trigservo.write(trigpos);

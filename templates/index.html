@@ -7,6 +7,7 @@
         var xpos = 90;
         var trig = 0;
         var sendstring = "";
+        var lasttime = 0;
         function doWork(trigstring, event){
             console.log(trigstring);
             $.post("/postrequest", {"byte":trigstring});
@@ -21,12 +22,18 @@
                 return xpos.toString()+trig.toString();
             }
         }
+        function epochTime(){
+            let dt = new Date();
+            return dt.getTime();
+        }
         // the part after && can be simplified
         window.addEventListener('keydown', function(event){
-            if (event.keyCode == 37 && xpos<=180) { // left
-                xpos += 1;
-            } else if (event.keyCode == 39 && xpos>=0) { // right
-                xpos -= 1;
+            if (event.keyCode == 37 && xpos<=180 && lasttime<=epochTime()) { // left
+                lasttime = epochTime + 1;
+                xpos += 5;
+            } else if (event.keyCode == 39 && xpos>=0 && lasttime<=epochTime()) { // right
+                lasttime = epochTime + 1;
+                xpos -= 5;
             } else if (event.keyCode == 32){
                 trig = 1;
             }
