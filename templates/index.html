@@ -29,10 +29,10 @@
         // the part after && can be simplified
         window.addEventListener('keydown', function(event){
             if (event.keyCode == 37 && xpos<=180 && lasttime<=epochTime()) { // left
-                lasttime = epochTime + 1;
+                lasttime = epochTime() + 1;
                 xpos += 5;
             } else if (event.keyCode == 39 && xpos>=0 && lasttime<=epochTime()) { // right
-                lasttime = epochTime + 1;
+                lasttime = epochTime() + 1;
                 xpos -= 5;
             } else if (event.keyCode == 32){
                 trig = 1;
