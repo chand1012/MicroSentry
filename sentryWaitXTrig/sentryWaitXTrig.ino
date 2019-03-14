@@ -1,16 +1,20 @@
-// this will be needed when I make the thing autonomous
-
 #include <Servo.h>
 #define XPIN 10
 #define TRIGPIN 9
 
+#define STOP 0
+#define LEFT 1
+#define RIGHT 2
+
 Servo xservo;
 Servo trigservo;
 
+unsigned int xstate = 0;
 unsigned int xpos = 0;
+unsigned int trigstate = 0;
 unsigned int trigpos = 0;
-String command = ""; //String Format: "<angle><trig>" ie 0901 for 90 degrees and shoot
-                     // where angle is 000 to 180
+String command = ""; //String Format: "<move><trig>" ie move right and shoot would be 21
+                     // where move is 0, 1, or 2
 
 void setup(){
     xservo.attach(XPIN);
@@ -27,16 +31,23 @@ void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();
         //Serial.println("Command: "+command);
-        xpos = command.substring(0,3).toInt();
-        trigpos = command.substring(3).toInt();
+        xstate = command.substring(0,1).toInt();
+        trigstate = command.substring(1).toInt();
       //  Serial.println(xpos);
-        if (trigpos!=0){
+        if (xstate == RIGHT){
+            xpos++;
+        } else if (xstate == LEFT){
+            xpos--;
+        }
+        if (trigstate != 0) {
             trigpos = 100;
-        } 
+        } else {
+            trigpos = 0;
+        }
         //Serial.println(trigpos);
         xservo.write(xpos);
         trigservo.write(trigpos);
       	//Serial.println(xservo.read());
       //Serial.println(trigservo.read());
     }
-}
+} // needs tested
