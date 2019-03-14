@@ -7,9 +7,9 @@ app = Flask(__name__)
 arduino = None
 
 if sys.platform=="win32":
-    arduino = serial.Serial('COM4', 9600)
+    arduino = serial.Serial("COM3", 9600)
 else:
-    arduino = serial.Serial('/dev/ttyACM0', 9600)
+    arduino = serial.Serial('/dev/ttyS3', 9600)
 
 @app.route("/")
 def index():
