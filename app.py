@@ -18,7 +18,7 @@ def index():
 @app.route("/postrequest", methods = ['POST'])
 def worker():
     data = request.form['byte']
-    arduino.write(data)
+    arduino.write(bytes(data))
     return data
 
 if __name__=="__main__":
