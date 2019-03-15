@@ -17,6 +17,7 @@ def index():
 
 @app.route("/postrequest", methods = ['POST'])
 def worker():
+    global lastcommand
     data = request.form['byte']
     if data!=lastcommand:
         arduino.write(bytes(data, 'utf-8'))
