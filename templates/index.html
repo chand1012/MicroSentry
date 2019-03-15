@@ -4,7 +4,7 @@
         <title>Turret</title>
     </head>
     <script type="text/javascript">
-        //needs rewritten for sentryWaitXTrig
+        
         var isKeyDown = false;
         var xstate = 0;
         var trig = 0;
@@ -21,7 +21,7 @@
             return xstate.toString() + trig.toString();
         }
        
-        // the part after && can be simplified
+        
         window.addEventListener('keydown', function(event){
             if (!isKeyDown){
                 if (event.keyCode == 37 ) { // left
