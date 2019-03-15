@@ -2,6 +2,7 @@
 #define XPIN 10
 #define TRIGPIN 9
 #define TDELAY 35 // in ms
+#define STEP 1
 #define STOP 0
 #define LEFT 1
 #define RIGHT 2
@@ -40,10 +41,10 @@ void loop(){
     xstate = command.charAt(0) - '0';
     trigstate = command.charAt(1) - '0';
     if (xstate == RIGHT && lasttime<=millis() && xpos<=180){
-        xpos += 1;
+        xpos += STEP;
         lasttime = millis() + TDELAY;
     } else if (xstate == LEFT && lasttime<=millis() && xpos>=0){
-        xpos -= 1;
+        xpos -= STEP;
         lasttime = millis() + TDELAY;
     }
     if (trigstate != 0) {
