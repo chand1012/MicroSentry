@@ -3,7 +3,7 @@ import serial, sys
 
 app = Flask(__name__)
 
-
+lastcommand = None
 arduino = None
 
 if sys.platform=="win32":
@@ -18,7 +18,9 @@ def index():
 @app.route("/postrequest", methods = ['POST'])
 def worker():
     data = request.form['byte']
-    arduino.write(bytes(data, 'utf-8'))
+    if data!=lastcommand:
+        arduino.write(bytes(data, 'utf-8'))
+        lastcommand = data
     return data
 
 if __name__=="__main__":
