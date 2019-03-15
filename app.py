@@ -3,7 +3,7 @@ import serial, sys
 
 app = Flask(__name__)
 
-lastcommand = None
+lastcommand = ''
 arduino = None
 
 if sys.platform=="win32":
