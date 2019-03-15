@@ -5,6 +5,7 @@
     </head>
     <script type="text/javascript">
         //needs rewritten for sentryWaitXTrig
+        var isKeyDown = false;
         var xstate = 0;
         var trig = 0;
         var sendstring = "";
@@ -22,21 +23,28 @@
        
         // the part after && can be simplified
         window.addEventListener('keydown', function(event){
-            if (event.keyCode == 37 ) { // left
-                xstate = 1;
-            } else if (event.keyCode == 39 ) { // right
-                xstate = 2;
-            } else if (event.keyCode == 32){
-                trig = 1;
+            if (!isKeyDown){
+                if (event.keyCode == 37 ) { // left
+                    isKeyDown = true
+                    xstate = 1;
+                } else if (event.keyCode == 39 ) { // right
+                    isKeyDown = true
+                    xstate = 2;
+                } else if (event.keyCode == 32){
+                    isKeyDown = true
+                    trig = 1;
+                }
+                sendstring = genSend();
+                doWork(sendstring, event);
             }
-            sendstring = genSend();
-            doWork(sendstring, event);
         });
         window.addEventListener('keyup', function(event){
             if (event.keyCode == 37 || event.keyCode == 39) { 
+                isKeyDown = false;
                 xstate = 0;
             } 
             if (event.keyCode == 32){
+                isKeyDown = false;
                 trig = 0;
             }
             sendstring = genSend();

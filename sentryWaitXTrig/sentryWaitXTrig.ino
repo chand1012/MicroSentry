@@ -31,7 +31,7 @@ void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();
         //Serial.println("Command: "+command);
-        xstate = command.substring(0,1).toInt();
+        xstate = command.substring(0,0).toInt();
         trigstate = command.substring(1).toInt();
       //  Serial.println(xpos);
         if (xstate == RIGHT){
