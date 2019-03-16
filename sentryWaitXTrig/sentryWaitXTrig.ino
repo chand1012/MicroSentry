@@ -25,19 +25,20 @@ void setup(){
     while(!Serial){
         //need serial for operation
     }
-    Serial.println("Initialized.");
-    Serial.println("Starting primary function.");
+    //Serial.println("Initialized.");
+    //Serial.println("Starting primary function.");
 }
 
 void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();
+        /*
         Serial.println(xpos);
         Serial.println(trigpos);
         Serial.println(xstate);
         Serial.println(trigstate);
+        */
     }
-        //Serial.println("Command: "+command);
     xstate = command.charAt(0) - '0';
     trigstate = command.charAt(1) - '0';
     if (xstate == RIGHT && lasttime<=millis() && xpos<=180){

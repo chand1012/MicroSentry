@@ -4,7 +4,6 @@
         <title>Turret</title>
     </head>
     <script type="text/javascript">
-        
         var isKeyDown = false;
         var xstate = 0;
         var trig = 0;
@@ -30,7 +29,8 @@
                 } else if (event.keyCode == 39 ) { // right
                     isKeyDown = true
                     xstate = 2;
-                } else if (event.keyCode == 32){
+                }
+                if (event.keyCode == 32){
                     isKeyDown = true
                     trig = 1;
                 }
