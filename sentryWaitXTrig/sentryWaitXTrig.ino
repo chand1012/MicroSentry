@@ -2,7 +2,7 @@
 #define XPIN 10
 #define TRIGPIN 9
 #define BAUD 115200
-#define TDELAY 35 // in ms
+#define TDELAY 10 // in ms
 #define STEP 1
 #define STOP 0
 #define LEFT 1
