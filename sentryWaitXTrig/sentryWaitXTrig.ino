@@ -45,10 +45,11 @@ void loop(){
         xpos -= STEP;
         lasttime = millis() + TDELAY;
     }
-    if (trigstate != 0) {
+    if (trigstate != 0 && lasttime<=millis()) {
         lasttime = millis() + TDELAY;
         trigpos = 0;
     } else if (trigstate == 0 && lasttime<=millis()) {
+        lasttime = millis() + TDELAY;
         trigpos = TPOS;
     }
     xservo.write(xpos);
