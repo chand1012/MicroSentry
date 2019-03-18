@@ -3,7 +3,7 @@
 #define TRIGPIN 9
 #define TPOS 100 // in degrees
 #define BAUD 115200 // in kbits
-#define TDELAY 10 // in ms
+#define TDELAY 50 // in ms
 #define STEP 1 // number of degrees per step
 #define STOP 0
 #define LEFT 1
@@ -33,20 +33,15 @@ void setup(){
 
 void loop(){
     while (Serial.available() > 0){
-        command = Serial.readString();
-        /*
-        Serial.println(xpos);
-        Serial.println(trigpos);
-        Serial.println(xstate);
-        Serial.println(trigstate);
-        */
+        command = Serial.readString();        
     }
+    //Serial.println("x pos: " + String(xpos) + " trigpos: " + String(trigpos));
     xstate = command.charAt(0) - '0';
     trigstate = command.charAt(1) - '0';
-    if (xstate == RIGHT && lasttime<=millis() && xpos<=180){
+    if (xstate == RIGHT && lasttime<=millis() && xpos<180){
         xpos += STEP;
         lasttime = millis() + TDELAY;
-    } else if (xstate == LEFT && lasttime<=millis() && xpos>=0){
+    } else if (xstate == LEFT && lasttime<=millis() && xpos>0){
         xpos -= STEP;
         lasttime = millis() + TDELAY;
     }
