@@ -1,6 +1,7 @@
 #include <Servo.h>
 #define XPIN 10
 #define TRIGPIN 9
+#define TPOS 100
 #define BAUD 115200
 #define TDELAY 10 // in ms
 #define STEP 1
@@ -12,10 +13,10 @@ Servo xservo;
 Servo trigservo;
 
 unsigned long lasttime = millis();
-unsigned int xstate = 0;
-unsigned int xpos = 90;
-unsigned int trigstate = 0;
-unsigned int trigpos = 100;
+byte trigstate = 0;
+byte xstate = 0;
+byte xpos = 90;
+byte trigpos = TPOS;
 String command = "00"; //String Format: "<move><trig>" ie move right and shoot would be 21
                      // where move is 0, 1, or 2 and trig is 0 or 1
 
@@ -53,7 +54,7 @@ void loop(){
         lasttime = millis() + TDELAY;
         trigpos = 0;
     } else if (trigstate == 0 && lasttime<=millis()) {
-        trigpos = 100;
+        trigpos = TPOS;
     }
     xservo.write(xpos);
     trigservo.write(trigpos);
