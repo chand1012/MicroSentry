@@ -35,7 +35,11 @@ void loop(){
     while (Serial.available() > 0){
         command = Serial.readString();        
     }
-    //Serial.println("x pos: " + String(xpos) + " trigpos: " + String(trigpos));
+    if (millis()%1000==0){
+        Serial.println("x pos: " + String(xpos) + " trigpos: " + String(trigpos));
+        Serial.println("Realtime X Pos: " + String(xservo.read()) + " Realtime Trig Pos: " + String(trigservo.read()));
+    }
+    
     xstate = command.charAt(0) - '0';
     trigstate = command.charAt(1) - '0';
     if (xstate == RIGHT && lasttime<=millis() && xpos<180){
@@ -54,7 +58,6 @@ void loop(){
     }
     xservo.write(xpos);
     trigservo.write(trigpos);
-    //Serial.println(xservo.read());
-    //Serial.println(trigservo.read());
+    
     
 } 
