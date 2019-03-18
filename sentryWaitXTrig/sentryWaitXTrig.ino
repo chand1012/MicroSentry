@@ -1,10 +1,10 @@
 #include <Servo.h>
 #define XPIN 10
 #define TRIGPIN 9
-#define TPOS 100
-#define BAUD 115200
+#define TPOS 100 // in degrees
+#define BAUD 115200 // in kbits
 #define TDELAY 10 // in ms
-#define STEP 1
+#define STEP 1 // number of degrees per step
 #define STOP 0
 #define LEFT 1
 #define RIGHT 2
