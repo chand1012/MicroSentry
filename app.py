@@ -2,14 +2,11 @@ from flask import Flask, render_template, request
 import serial, sys
 
 app = Flask(__name__)
-
+baud = 115200
 lastcommand = ''
 arduino = None
 
-if sys.platform=="win32":
-    arduino = serial.Serial("COM3", 9600)
-else:
-    arduino = serial.Serial('/dev/ttyACM0', 9600)
+arduino = serial.Serial('/dev/ttyACM0', baud)
 
 @app.route("/")
 def index():

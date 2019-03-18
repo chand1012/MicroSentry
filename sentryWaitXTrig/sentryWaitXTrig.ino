@@ -1,6 +1,7 @@
 #include <Servo.h>
 #define XPIN 10
 #define TRIGPIN 9
+#define BAUD 115200
 #define TDELAY 35 // in ms
 #define STEP 1
 #define STOP 0
@@ -21,7 +22,7 @@ String command = "00"; //String Format: "<move><trig>" ie move right and shoot w
 void setup(){
     xservo.attach(XPIN);
     trigservo.attach(TRIGPIN);
-    Serial.begin(9600);
+    Serial.begin(BAUD);
     while(!Serial){
         //need serial for operation
     }
