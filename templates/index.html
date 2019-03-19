@@ -52,7 +52,7 @@
     <style>
         .center{
             position: fixed;
-            top: 50%;
+            top: 75%;
             left: 50%;
             width: 190px;
             height: 90px;
@@ -65,8 +65,13 @@
         .button-xlarge{
             font-size: 125%;
         }
+        .video-feed{
+            height: 480px;
+            width: 640px;
+        }
     </style>
     <body class="center">
+        <img class="video-feed" src="{{ url_for('video_feed') }}">
         <button id="10" onclick="doWork(this.id, 'undefined')" class="button-xlarge pure-button pure-button-primary">Left</button>
         <button id="20" onclick="doWork(this.id, 'undefined')" class="button-xlarge pure-button pure-button-primary">Right</button>
         <button id="01" onclick="doWork(this.id, 'undefined')" class="button-xlarge pure-button pure-button-primary">Fire</button>

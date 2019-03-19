@@ -1,25 +1,33 @@
-from flask import Flask, render_template, request
-import serial, sys
+import sys
+
+import serial
+from flask import Flask, Response, render_template, request
+
+from camera_pi import Camera
 
 app = Flask(__name__)
 baud = 115200
-lastcommand = ''
-arduino = None
-
 arduino = serial.Serial('/dev/ttyACM0', baud)
-#arduino = serial.Serial('COM3', baud)
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 @app.route("/")
 def index():
     return render_template("index.html")
 
 @app.route("/postrequest", methods = ['POST'])
 def worker():
-    global lastcommand
     data = request.form['byte']
-    if data!=lastcommand:
-        arduino.write(bytes(data, 'utf-8'))
-        lastcommand = data
+    arduino.write(bytes(data, 'utf-8'))
     return data
 
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
 if __name__=="__main__":
-    app.run('0.0.0.0', "1166", debug=True)
+    app.run('0.0.0.0', "1166", debug=True, threaded=True)
